@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
+gem 'omniauth-slack', github: 'kmrshntr/omniauth-slack'
 gem 'materialize-sass'
 gem 'material_design_icons'
 
