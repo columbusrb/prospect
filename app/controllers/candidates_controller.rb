@@ -4,7 +4,7 @@ class CandidatesController < ApplicationController
   # GET /candidates
   # GET /candidates.json
   def index
-    @candidates = Candidate.all
+    @candidates = Candidate.all.order(last_name: :desc)
   end
 
   # GET /candidates/1
@@ -19,6 +19,10 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/1/edit
   def edit
+    unless @candidate.user_id == current_user.id
+      flash[:warning] = 'You can only edit your own candidacy.'
+      redirect_to candidates_path
+    end
   end
 
   # POST /candidates
@@ -54,10 +58,16 @@ class CandidatesController < ApplicationController
   # DELETE /candidates/1
   # DELETE /candidates/1.json
   def destroy
-    @candidate.destroy
-    respond_to do |format|
-      format.html { redirect_to candidates_url, notice: 'Candidate was successfully destroyed.' }
-      format.json { head :no_content }
+    if @candidate.user_id == current_user.id
+        @candidate.destroy
+      respond_to do |format|
+        format.html { redirect_to candidates_url, 
+          notice: 'Candidate was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:warning] = "You cannot destroy another's candidacy."
+      redirect_to candidates_path
     end
   end
 
@@ -69,6 +79,8 @@ class CandidatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def candidate_params
-      params.require(:candidate).permit(:first_name, :last_name, :bio, :professional, :picture, :why, :user_id)
+      params.require(:candidate)
+        .permit(:first_name, :last_name, :bio, :professional, :picture, :why)
+        .merge(user_id: current_user.id)
     end
 end

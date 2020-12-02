@@ -46,6 +46,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       u.email = 'ruby@columbusrb.com'
       u.password = 'crb123'
     end
-    
+
+    User.create! do |u|
+      u.id = 2
+      u.email = 'sapphire@columbusrb.com'
+      u.password = 'crb123'
+    end
+
   end
 end
