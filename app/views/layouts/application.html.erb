@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Candidate</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if user_signed_in? %>
+      <%= link_to('Edit registration', edit_user_registration_path) %>
+      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+    <% else %>
+      <%= link_to('Register', new_user_registration_path)  %>
+      <%= link_to('Login', new_user_session_path)  %>  
+    <% end %>
+    
+    <%= yield %>
+  </body>
+
+  <% unless flash.empty? %>
+    <script type="text/javascript">
+      <% flash.each do |f| %>
+        <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+          toastr['<%= type %>']('<%= f[1] %>');
+      <% end %>
+    </script>
+  <% end %>
+</html>
