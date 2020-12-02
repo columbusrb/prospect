@@ -1,0 +1,52 @@
+<%= form_with(model: candidate, local: true) do |form| %>
+  <% if candidate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(candidate.errors.count, "error") %> prohibited this candidate from being saved:</h2>
+
+      <ul>
+        <% candidate.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bio %>
+    <%= form.text_area :bio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :professional %>
+    <%= form.check_box :professional %>
+  </div>
+
+  <div class="field">
+    <%= form.label :picture %>
+    <%= form.text_field :picture %>
+  </div>
+
+  <div class="field">
+    <%= form.label :why %>
+    <%= form.text_area :why %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

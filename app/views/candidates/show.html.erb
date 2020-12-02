@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @candidate.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @candidate.last_name %>
+</p>
+
+<p>
+  <strong>Bio:</strong>
+  <%= @candidate.bio %>
+</p>
+
+<p>
+  <strong>Professional:</strong>
+  <%= @candidate.professional %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @candidate.picture %>
+</p>
+
+<p>
+  <strong>Why:</strong>
+  <%= @candidate.why %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @candidate.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
+<%= link_to 'Back', candidates_path %>
