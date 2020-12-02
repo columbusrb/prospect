@@ -10,17 +10,80 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= link_to('Edit registration', edit_user_registration_path) %>
-      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>       
-      <br>
-      <%= link_to('View Candidates', candidates_path) %>
-    <% else %>
-      <%= link_to('Register', new_user_registration_path)  %>
-      <%= link_to('Login', new_user_session_path)  %>  
-    <% end %>
-    
-    <%= yield %>
+    <header>
+      <nav class="nav-extended">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Logo</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <% if user_signed_in? %>
+            <%= content_tag(:li, link_to('Edit registration', edit_user_registration_path)) %>
+            <%= content_tag(:li, link_to('Logout', destroy_user_session_path, :method => :delete)) %>       
+          <% else %>
+            <%= content_tag(:li, link_to('Register', new_user_registration_path)) %>
+            <%= content_tag(:li, link_to('Login', new_user_session_path))  %>  
+          <% end %>
+          </ul>
+      </div>
+      <% if user_signed_in? %>
+      <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+          <%= content_tag(:li, link_to('View Candidates', candidates_path), class: "tab") %>
+          <li class="tab disabled"><a href="#test3">Vote</a></li>
+        </ul>
+      </div>
+      <% end %>
+      </nav>
+    <header>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">JavaScript</a></li>
+  </ul>
+
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <%= yield %>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Columbus Ruby Brigade</h5>
+          <p class="grey-text text-lighten-4">
+            Text content here.
+          </p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="#!">Home</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Candidates</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Vote</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2020 Columbus Ruby Brigade
+      <a class="grey-text text-lighten-4 right" href="https://crb-slack-invite.herokuapp.com/"><i class="mdi mdi-slack mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://twitter.com/columbusrb"><i class="mdi mdi-twitter mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://github.com/columbusrb"><i class="mdi mdi-github-circle mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://ruby-doc.org/"><i class="mdi mdi-ruby mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://columbusrb.com"><i class="mdi mdi-web mdi-24px"></i></a>
+      </div>
+    </div>
+  </footer>
+
   </body>
 
   <% unless flash.empty? %>
@@ -32,3 +95,6 @@
     </script>
   <% end %>
 </html>
+
+<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
