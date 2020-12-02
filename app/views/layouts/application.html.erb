@@ -17,10 +17,9 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <% if user_signed_in? %>
-            <%= content_tag(:li, link_to('Edit registration', edit_user_registration_path)) %>
+            Hello <%= current_user.name %>
             <%= content_tag(:li, link_to('Logout', destroy_user_session_path, :method => :delete)) %>       
           <% else %>
-            <%= content_tag(:li, link_to('Register', new_user_registration_path)) %>
             <%= content_tag(:li, link_to('Login', new_user_session_path))  %>  
           <% end %>
           </ul>
