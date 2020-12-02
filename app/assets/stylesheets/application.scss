@@ -1,0 +1,16 @@
+@import "materialize/components/color-variables";
+$primary-color: color("pink", "darken-3") !default;
+$secondary-color: color("red", "lighten-5") !default;
+@import "materialize";
+@import "materialdesignicons";
+
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
