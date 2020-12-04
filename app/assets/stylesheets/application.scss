@@ -1,16 +1,156 @@
 @import "materialize/components/color-variables";
-$primary-color: color("pink", "darken-3") !default;
-$secondary-color: color("red", "lighten-5") !default;
+// variable changes MUST go here for styling
+$primary-color: color("deep-purple", "darken-3") !default;
+$secondary-color: color("pink", "accent-2") !default;
+$tertiary-color: color("amber", "darken-2");
+$purple-color: color("purple", "darken-2");
+$red-accent: color("red", "accent-3");
+$pink-accent: color("pink", "accent-3");
+$yellow-accent: color("orange", "accent-3");
+$orange-accent: color("deep-orange", "accent-3");
+$indigo-accent: color("indigo", "darken-2");
+$purple-accent: color("deep-purple", "accent-2");
+$green-accent: color("lime", "darken-2");
+$blue-accent: color("blue", "darken-4");
+
+$link-color: color("pink", "accent-2") !default;
+
+$secondary-color: color("teal", "lighten-1") !default;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
 @import "materialize";
 @import "materialdesignicons";
 
+html, body {
+  height: 100%;
+  position: static;
+}
 
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  padding-bottom: 220px;
 }
 
 main {
   flex: 1 0 auto;
+}
+
+nav {
+  background: linear-gradient(145deg, $primary-color, $purple-color, $secondary-color);
+  height: 64px !important;
+  .shrink-logo {
+    max-width: 75px;
+    padding-top: .75em;
+  }
+  .nav-padding {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .nav-wrangler {
+    display: inline-block !important;
+  }
+  ul {
+    li {
+      float: right;
+    }
+  }
+}
+
+footer {
+  background: linear-gradient(145deg, $primary-color, $purple-color);
+  padding-top: 1em;
+  position: relative;
+  bottom: 0 !important;
+  height: inherit;
+  width: 100%;
+  z-index: 1;
+}
+
+.margin-box {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.extra-margin {
+  margin-top: 1.75em;
+}
+
+.btn-vote {
+  background-color: $tertiary-color;
+}
+
+.candidate-picture {
+  margin: 0 auto;
+  background-color: $primary-color;
+  background-size: cover;
+  background-position: center;
+  width: 250px;
+  height: 250px;
+  padding: 15px;
+  margin-top: 22px;
+  border-radius: 50%;
+  border: 5px white solid;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+ .card-spacing {
+    margin: 0 auto;
+  }
+
+.card {
+  min-width: 10em;
+  .professional-grade {
+    display: inline-block;
+    font-size: .89em;
+    min-height: 2em;
+    .mdi-bee::before{
+      font-size: 16pt;
+    }
+  }
+  .center-button {
+    display: flex;
+    justify-content: space-around;
+    min-width: 200px;
+  }
+}
+
+.rainbow {
+  background: linear-gradient(43deg, $secondary-color, $tertiary-color);
+}
+
+.rainbow-text {
+  background: linear-gradient(22deg, $primary-color, $secondary-color);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.sapphire {
+  background: linear-gradient(65deg, $indigo-accent, $purple-accent);
+}
+
+.mineral {
+  background: linear-gradient(77deg, $green-accent, $blue-accent);
+}
+
+.ruby {
+  background: linear-gradient(to right, $red-accent, $secondary-color, $pink-accent);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bee {
+  background: linear-gradient(to right, $yellow-accent, $orange-accent);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mdi-arrow-left::before {
+  font-weight: 800;
 }
