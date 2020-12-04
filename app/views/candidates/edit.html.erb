@@ -1,6 +1,13 @@
-<h1>Editing Candidate</h1>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <h1>Editing Candidate</h1>
 
-<%= render 'form', candidate: @candidate %>
+      <%= render 'form', candidate: @candidate %>
 
-<%= link_to 'Show', @candidate %> |
-<%= link_to 'Back', candidates_path %>
+      <%= link_to candidates_path do %>
+        <i class="mdi mdi-arrow-left mdi-14px"></i> Back to Candidates
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,39 +1,67 @@
-<p>
-  <strong>First name:</strong>
-  <%= @candidate.first_name %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @candidate.last_name %>
-</p>
+      <div class="candidate-picture" style="background-image: url(https://images.unsplash.com/photo-1518946222227-364f22132616?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80);">
+      </div>
 
-<p>
-  <strong>Bio:</strong>
-  <%= @candidate.bio %>
-</p>
+      <div>
+        <h1><%= @candidate.first_name + ' ' + @candidate.last_name %></h1>
+      </div>
 
-<p>
-  <strong>Professional:</strong>
-  <%= @candidate.professional %>
-</p>
+      <div>
+        <p>
+          <span class="rainbow-text">Bio:</span><br>
+          <%= @candidate.bio %>
+        </p>
+      </div>
 
-<p>
-  <strong>Picture:</strong>
-  <%= @candidate.picture %>
-</p>
+      <div>
+        <p>
+          <span class="rainbow-text">Why <%= @candidate.first_name %> Is Running:</span><br>
+          <%= @candidate.why %>
+        </p>
+      </div>
 
-<p>
-  <strong>Why:</strong>
-  <%= @candidate.why %>
-</p>
+      <div>
+        <p>
+          <% if @candidate.professional == true %>
+            <span class="professional-grade ruby" title="Someone with 3+ years of experience in a technical role"><i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional</span>
+          <% else %>
+            <span class="professional-grade bee" title="New professional with less than 3 years of experience in a technical role or non-developer"><i class="mdi mdi-bee mdi-12px"></i> New Professional || Non-technical</span>
+          <% end %>
+        </p>
+      </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @candidate.user_id %>
-</p>
+      <%= link_to candidates_path do %>
+        <i class="mdi mdi-arrow-left mdi-14px"></i> Back to Candidates
+      <% end %>
 
-<% if @candidate.user_id == current_user.id %>
-<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
-<% end %>
-<%= link_to 'Back', candidates_path %>
+      <% if current_user.id.present? %>
+        <div class="fixed-action-btn click-to-toggle">
+          <span class="btn-floating btn-large" title="Your Candidacy Options">
+            <i class='mdi mdi-menu rainbow mdi-36px'></i>
+          </span>
+          <ul>
+            <%= link_to @candidate, method: :delete do %>
+              <li><span class="btn-floating mineral click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
+            <% end %>
+            <%= link_to edit_candidate_path(@candidate) do %>
+              <li><span class="btn-floating sapphire click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
+            <% end %>
+          </ul>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, {
+      direction: 'left',
+      hoverEnabled: false
+    });
+  });
+</script>

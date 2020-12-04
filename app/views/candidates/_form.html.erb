@@ -11,37 +11,47 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
+  <div class="row">
+    <div class="col s12">
+      <div class="input-field">
+        <%= form.label :first_name %>
+        <%= form.text_field :first_name %>
+      </div>
 
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
+      <div class="input-field">
+        <%= form.label :last_name %>
+        <%= form.text_field :last_name %>
+      </div>
 
-  <div class="field">
-    <%= form.label :bio %>
-    <%= form.text_area :bio %>
-  </div>
+      <div class="input-field">
+        <%= form.label :bio %>
+        <%= form.text_area :bio, class: "materialize-textarea" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :professional %>
-    <%= form.check_box :professional %>
-  </div>
+        <%= form.label :professional do %>
+          <%= form.check_box :professional, { class: 'filled-in' } %>
+          <span class="professional-grade ruby"><i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional?</span><br>
+          <span class="professional-grade">...is someone with 3+ years of experience in a technical role.<br>
+          There should be at least one board member who has less than 3 years of development experience OR is a non-developer.</span>
+</span>
+        <% end %>
 
-  <div class="field">
-    <%= form.label :picture %>
-    <%= form.text_field :picture %>
-  </div>
+      <div class="input-field">
+        <%= form.label :picture %>
+        <%= form.text_field :picture %>
+      </div>
 
-  <div class="field">
-    <%= form.label :why %>
-    <%= form.text_area :why %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="input-field">
+        <%= form.label :why, 'Why are you running?' %>
+        <%= form.text_area :why, class: "materialize-textarea" %>
+      </div>
+
+      <div class="actions">
+        <%= form.button :submit, class: 'btn waves-effect waves-light' do %>
+          Submit <i class='mdi mdi-send right'></i>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>

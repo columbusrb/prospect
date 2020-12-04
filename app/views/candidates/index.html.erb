@@ -1,39 +1,81 @@
-<h1>Candidates</h1>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <h1>Candidates</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Bio</th>
-      <th>Professional</th>
-      <th>Picture</th>
-      <th>Why</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @candidates.each do |candidate| %>
-      <tr>
-        <td><%= candidate.first_name %></td>
-        <td><%= candidate.last_name %></td>
-        <td><%= candidate.bio %></td>
-        <td><%= candidate.professional %></td>
-        <td><%= candidate.picture %></td>
-        <td><%= candidate.why %></td>
-        <td><%= candidate.user_id %></td>
-        <td><%= link_to 'Show', candidate %></td>
-        <% if candidate.user_id == current_user.id %>
-        <td><%= link_to 'Edit', edit_candidate_path(candidate) %></td>
-        <td><%= link_to 'Destroy', candidate, method: :delete %></td>
+          <div class="button-box center-align">
+            <p>
+              The election is on DATE HERE. POPULATE IT WITH RUBY!
+            </p>
+          <% unless current_user.candidate.present? %>
+            <p>
+              Hi there! Would you like to run for the Board of Columbus Ruby? You should!
+            </p>
+            <%= link_to 'Add yourself as a candidate!', new_candidate_path, class: 'waves-effect waves-light btn center-align' %>
+          </div>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+        <div class="card-spacing">
+          <% 4.times do %>
+          <% @candidates.each do |candidate| %>
+            <div class="col s12 m6 x3">
+              <div class="card">
+                <div class="card-image" background-color="deep-purple">
+                  <img src="https://images.unsplash.com/photo-1518946222227-364f22132616?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80">
+                  <span class="card-title"><%= candidate.first_name + ' ' + candidate.last_name %> </span>
+                  <% if current_user.id.present? %>
+                      <div class="fixed-action-btn click-to-toggle">
+                        <span class="btn-floating btn-large" title="Your Candidacy Options">
+                          <i class='mdi mdi-menu rainbow mdi-36px'></i>
+                        </span>
+                        <ul>
+                          <%= link_to candidate, method: :delete do %>
+                            <li><span class="btn-floating mineral click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
+                          <% end %>
+                          <%= link_to edit_candidate_path(candidate) do %>
+                            <li><span class="btn-floating sapphire click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
+                          <% end %>
+                        </ul>
+                        </div>
+                    <% end %>
+                </div>
+                <div class="card-content left-align">
+                  <p>
+                    <span class="rainbow-text">Bio:</span><br>
+                    <%= truncate(candidate.bio, length: 220) %>
+                  </p>
+                  <p>
+                    <span class="rainbow-text">Why <%= candidate.first_name %> Is Running:</span><br>
+                    <%= truncate(candidate.why, length: 220) %>
+                  </p>
+                  
+                  <% if candidate.professional == true %>
+                    <span class="professional-grade ruby" title="Someone with 3+ years of experience in a technical role"><i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional</span>
+                  <% else %>
+                    <span class="professional-grade bee" title="New professional with less than 3 years of experience in a technical role or non-developer"><i class="mdi mdi-bee mdi-12px"></i> New Professional || Non-technical</span>
+                  <% end %>
 
-<%= link_to 'New Candidate', new_candidate_path %>
+                <div class="card-action extra-margin center-align">
+                  <%= link_to 'View Candidate Profile', candidate, class: 'waves-effect waves-light btn center-align' %>
+                    <span class="btn-vote waves-effect waves-light btn center-align" title="Vote">Vote <i class='mdi mdi-vote mdi-24px'></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, {
+      direction: 'left',
+      hoverEnabled: false
+    });
+  });
+</script>

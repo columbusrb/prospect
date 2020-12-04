@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Prospect</title>
+    <title>Prospect: The Columbus Ruby Brigade's Nomination & Voting App</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,44 +12,25 @@
   <body>
     <header>
       <nav class="nav-extended">
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Logo</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <div class="nav-wrapper nav-padding">
+        <%= link_to root_path do %>
+          <%= image_tag("http://www.columbusrb.com/assets/logo-f727f91265179e80f6d7e78aa594c4a0474135ad1d8158d342d45dbccad73b67.png", class: "shrink-logo", alt: "Columbus Ruby Brigade Logo") %>
+        <% end %>
+        <ul id="nav" class="right push-left">
           <% if user_signed_in? %>
-            Hello <%= current_user.name %>
-            <%= content_tag(:li, link_to('Logout', destroy_user_session_path, :method => :delete)) %>       
+            Hello, <strong><%= current_user.name %></strong>
+            <%= content_tag(:li, link_to('Logout', destroy_user_session_path, :method => :delete)) %>
+            <%= content_tag(:li, link_to('Candidates', candidates_path)) %>
           <% else %>
             <%= content_tag(:li, link_to('Login', new_user_session_path))  %>  
           <% end %>
           </ul>
       </div>
-      <% if user_signed_in? %>
-      <div class="nav-content">
-        <ul class="tabs tabs-transparent">
-          <%= content_tag(:li, link_to('View Candidates', candidates_path), class: "tab") %>
-          <li class="tab disabled"><a href="#test3">Vote</a></li>
-        </ul>
-      </div>
-      <% end %>
       </nav>
-    <header>
-
-  <ul class="sidenav" id="mobile-demo">
-    <li><a href="sass.html">Sass</a></li>
-    <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">JavaScript</a></li>
-  </ul>
+    </header>
 
   <main>
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <%= yield %>
-        </div>
-      </div>
-
-    </div>
+    <%= yield %>
   </main>
 
   <footer class="page-footer">
@@ -58,15 +39,19 @@
         <div class="col l6 s12">
           <h5 class="white-text">Columbus Ruby Brigade</h5>
           <p class="grey-text text-lighten-4">
-            Text content here.
+            The Columbus Ruby Brigade is dedicated to the promotion of the Ruby Programming Language.
           </p>
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="white-text">Links</h5>
           <ul>
-            <li><a class="grey-text text-lighten-3" href="#!">Home</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Candidates</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Vote</a></li>
+            <%= link_to root_path do %>
+              <li><span class="grey-text text-lighten-3">Home</span></li>
+            <% end %>
+            <%= link_to candidates_path do %>
+              <li><span class="grey-text text-lighten-3">Candidates</span></li>
+            <% end %>
+            <li><a class="gray-text text-lighten-3" href="https://columbusrb.com" target="_blank">Columbus Ruby Brigade Site</a></li>
           </ul>
         </div>
       </div>
@@ -74,11 +59,10 @@
     <div class="footer-copyright">
       <div class="container">
       © 2020 Columbus Ruby Brigade
-      <a class="grey-text text-lighten-4 right" href="https://crb-slack-invite.herokuapp.com/"><i class="mdi mdi-slack mdi-24px"></i></a>
-      <a class="grey-text text-lighten-4 right" href="https://twitter.com/columbusrb"><i class="mdi mdi-twitter mdi-24px"></i></a>
-      <a class="grey-text text-lighten-4 right" href="https://github.com/columbusrb"><i class="mdi mdi-github-circle mdi-24px"></i></a>
-      <a class="grey-text text-lighten-4 right" href="https://ruby-doc.org/"><i class="mdi mdi-ruby mdi-24px"></i></a>
-      <a class="grey-text text-lighten-4 right" href="https://columbusrb.com"><i class="mdi mdi-web mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://crb-slack-invite.herokuapp.com/" target="_blank"><i class="mdi mdi-slack mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://twitter.com/columbusrb" target="_blank"><i class="mdi mdi-twitter mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://github.com/columbusrb" target="_blank"><i class="mdi mdi-github-circle mdi-24px"></i></a>
+      <a class="grey-text text-lighten-4 right" href="https://www.meetup.com/columbusrb/" target="_blank"><i class="mdi mdi-meetup mdi-24px"></i></a>
       </div>
     </div>
   </footer>
@@ -94,6 +78,3 @@
     </script>
   <% end %>
 </html>
-
-<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
