@@ -1,7 +1,7 @@
 <%= form_with(model: candidate, local: true) do |form| %>
   <% if candidate.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(candidate.errors.count, "error") %> prohibited this candidate from being saved:</h2>
+      <strong><%= pluralize(candidate.errors.count, "error") %> prohibited this candidate from being saved:</strong>
 
       <ul>
         <% candidate.errors.full_messages.each do |message| %>
@@ -33,14 +33,8 @@
           <span class="professional-grade ruby"><i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional?</span><br>
           <span class="professional-grade">...is someone with 3+ years of experience in a technical role.<br>
           There should be at least one board member who has less than 3 years of development experience OR is a non-developer.</span>
-</span>
+          </span>
         <% end %>
-
-      <div class="input-field">
-        <%= form.label :picture %>
-        <%= form.text_field :picture %>
-      </div>
-
 
       <div class="input-field">
         <%= form.label :why, 'Why are you running?' %>

@@ -1,5 +1,18 @@
-<h2>Log in</h2>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <h2>Log in</h2>
 
-<%= link_to user_slack_omniauth_authorize_path do %>
-  <img alt=""Sign in with Slack"" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
-<% end %>
+      <p> Sign into this application with Slack.</p>
+      <%= link_to user_slack_omniauth_authorize_path do %>
+        <img alt=""Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
+      <% end %>
+            <p>
+        You must be a member of the <a href="https://columbusrb.com" target="_blank">Columbus Ruby Brigade</a> in order to successfully nominate yourself and/or vote.
+      </p>
+      <p>
+        You may join our Slack group here: <a href="https://crb-slack-invite.herokuapp.com/">Columbus Ruby Brigade Slack</a>
+      </p>
+    </div>
+  </div>
+</div>

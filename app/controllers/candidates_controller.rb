@@ -1,5 +1,5 @@
 class CandidatesController < ApplicationController
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :vote]
 
   # GET /candidates
   # GET /candidates.json
@@ -14,7 +14,12 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/new
   def new
-    @candidate = Candidate.new
+    if helpers.within_nominations_period?
+      @candidate = Candidate.new
+    else
+      flash[:warning] = 'Nominations are not currently open.'
+      redirect_to candidates_path    
+    end
   end
 
   # GET /candidates/1/edit
@@ -38,6 +43,26 @@ class CandidatesController < ApplicationController
         format.html { render :new }
         format.json { render json: @candidate.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def vote
+    if helpers.within_voting_period?
+      if current_user.votes.count > 5
+        redirect_to candidates_path, notice: "You've hit your maximum (5) number of allowed votes."
+      else
+        vote = current_user.votes.find_by(candidate: @candidate)
+        if vote.present?
+          vote.destroy
+          redirect_to candidates_path, notice: "You have removed your vote."
+        else
+          current_user.votes.create!(candidate: @candidate)
+          redirect_to candidates_path, notice: "You voted! Yay!"
+        end
+      end
+    else
+      flash[:warning] = 'Voting is not currently open; you cannot vote.'
+      redirect_to candidates_path
     end
   end
 

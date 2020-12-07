@@ -21,27 +21,24 @@ $error-color: color("red", "base") !default;
 @import "materialize";
 @import "materialdesignicons";
 
-html, body {
-  height: 100%;
-  position: static;
-}
+
 
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  padding-bottom: 220px;
 }
 
 main {
   flex: 1 0 auto;
+  // min-height: 60%;
 }
 
 nav {
   background: linear-gradient(145deg, $primary-color, $purple-color, $secondary-color);
   height: 64px !important;
   .shrink-logo {
-    max-width: 75px;
+    max-width: 100px;
     padding-top: .75em;
   }
   .nav-padding {
@@ -66,19 +63,31 @@ footer {
   height: inherit;
   width: 100%;
   z-index: 1;
+  .row .col {
+    float: left !important;
+  }
+}
+
+.button_to {
+  input {
+    color: white;
+  }
 }
 
 .margin-box {
   margin-top: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 4em;
 }
 
 .extra-margin {
   margin-top: 1.75em;
 }
 
-.btn-vote {
-  background-color: $tertiary-color;
+.btn-vote-remove {
+  background-color: $yellow-accent;
+}
+.btn-vote-add {
+  background-color: $indigo-accent;
 }
 
 .candidate-picture {
@@ -95,26 +104,45 @@ footer {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
-
- .card-spacing {
-    margin: 0 auto;
+div {
+  .card-container {
+    -moz-column-width: 22rem;
+    -webkit-column-width: 22rem;
+    -moz-column-gap: 1rem;
+    -webkit-column-gap: 1rem;
   }
-
-.card {
-  min-width: 10em;
-  .professional-grade {
+  .card-panel {
     display: inline-block;
-    font-size: .89em;
-    min-height: 2em;
-    .mdi-bee::before{
-      font-size: 16pt;
+    padding: 0 !important;
+    width: 100%;
+  }
+  .card {
+    min-width: 20em;
+    .professional-grade {
+      display: block;
+      font-size: .89em;
+      min-height: 2em;
+      .mdi-bee::before{
+        font-size: 16pt;
+      }
+    }
+    .center-button {
+      display: flex;
+      justify-content: space-around;
+      min-width: 200px;
+    }
+    .card-title {
+      margin: 0 auto;
+      color: black;
+      font-weight: 600;
     }
   }
-  .center-button {
-    display: flex;
-    justify-content: space-around;
-    min-width: 200px;
-  }
+}
+
+.row .col{
+  float: none !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .rainbow {
@@ -149,6 +177,10 @@ footer {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.mdi:before {
+  display: inherit;
 }
 
 .mdi-arrow-left::before {

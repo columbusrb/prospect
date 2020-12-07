@@ -1,8 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col s12">
-
-      <div class="candidate-picture" style="background-image: url(https://images.unsplash.com/photo-1518946222227-364f22132616?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80);">
+    <div class="col m12 xl8">
+      <div class="candidate-picture" style="background-image: url(<%= @candidate.user.avatar_url || @candidate.picture %>);">
       </div>
 
       <div>
@@ -37,7 +36,7 @@
         <i class="mdi mdi-arrow-left mdi-14px"></i> Back to Candidates
       <% end %>
 
-      <% if current_user.id.present? %>
+      <% if current_user.candidate.present? %>
         <div class="fixed-action-btn click-to-toggle">
           <span class="btn-floating btn-large" title="Your Candidacy Options">
             <i class='mdi mdi-menu rainbow mdi-36px'></i>
