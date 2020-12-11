@@ -69,8 +69,16 @@ footer {
 }
 
 .button_to {
+  .btn {
+    padding: 0px;
+  }
   input {
     color: white;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    padding-left: 16px;
+    padding-right: 16px;
+    cursor: pointer;
   }
 }
 
