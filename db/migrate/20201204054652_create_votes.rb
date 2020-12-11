@@ -6,5 +6,6 @@ class CreateVotes < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_index :votes, %i[user_id candidate_id], unique: true
   end
 end

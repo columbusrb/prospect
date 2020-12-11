@@ -47,18 +47,5 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
     # add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
-
-    # Create first account
-    # User.create! do |u|
-    #   u.email = 'ruby@columbusrb.com'
-    #   u.password = 'crb123'
-    # end
-
-    # User.create! do |u|
-    #   u.id = 2
-    #   u.email = 'sapphire@columbusrb.com'
-    #   u.password = 'crb123'
-    # end
-
   end
 end
