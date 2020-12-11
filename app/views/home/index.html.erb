@@ -13,6 +13,7 @@
         <p>
           Log in with your Slack account. You need to join CRB's Slack in order to run as a candidate and vote.
         </p>
+      <% unless voting_over? %>
         <p>
           <span class="rainbow-text">Nominations Run:</span> <br>
           <span><%= l nominations_starts %> - <br> 
@@ -23,6 +24,12 @@
           <span><%= l voting_starts %> - <br>
           <%= l voting_ends %></span>
         </p>
+      <% end %>
+      <% if voting_over? %>
+          <p>
+            <span class="rainbow-text">Voting is over! Go see the election results now!</span>
+          </p>
+      <% end %>
     </div>
   </div>
 </div>

@@ -28,13 +28,13 @@
         <%= form.text_area :bio, class: "materialize-textarea" %>
       </div>
 
-        <%= form.label :professional do %>
-          <%= form.check_box :professional, { class: 'filled-in' } %>
-          <span class="professional-grade ruby"><i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional?</span><br>
-          <span class="professional-grade">...is someone with 3+ years of experience in a technical role.<br>
-          There should be at least one board member who has less than 3 years of development experience OR is a non-developer.</span>
-          </span>
-        <% end %>
+      <%= form.label :professional do %>
+        <%= form.check_box :professional, { class: 'filled-in' } %>
+        <span class="professional-grade ruby"><i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional?</span><br>
+        <span class="professional-grade">...is someone with 3+ years of experience in a technical role.<br>
+        There should be at least one board member who has less than 3 years of development experience OR is a non-developer.</span>
+        </span>
+      <% end %>
 
       <div class="input-field">
         <%= form.label :why, 'Why are you running?' %>

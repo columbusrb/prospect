@@ -4,40 +4,63 @@
       <h1>Candidates</h1>
 
           <div class="margin-box left-align">
-            <p>
-              <span class="rainbow-text">Nominations Run:</span> <br>
-                <span><%= l nominations_starts %> - <br> 
-                <%= l nominations_ends %></span>
-            </p>
-            <p>
-              <span class="rainbow-text">Voting Runs:</span> <br>
-                <span><%= l voting_starts %> - <br>
-                <%= l voting_ends %></span>
-            </p>
-          <% if within_nominations_period? && current_user.candidate.present? %>
-            <div class="fixed-action-btn click-to-toggle">
-              <span class="btn-floating btn-large" title="Your Candidacy Options">
-                <i class='mdi mdi-menu rainbow mdi-36px'></i>
-              </span>
-              <ul>
-                <%= link_to current_user.candidate, method: :delete do %>
-                  <li><span class="btn-floating mineral click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
+            <% if voting_over? %>
+            <span class="rainbow-text">Congratulations to Our New Board!</span>
+            <% Candidate.new_board_members.each do |b| %>
+              <p>
+                <ul>
+                  <li><span class="rainbow-text"><i class="mdi mdi-ruby mdi-12px"></i></span> <%= b %></li>
+                </ul>
+              </p>
+            <% end %>
+            <% end %>
+            <% unless voting_over? %>
+              <p>
+                <span class="rainbow-text">Nominations Run:</span>
+                <br>
+                <span>
+                  <%= l nominations_starts %> - <br> 
+                  <%= l nominations_ends %>
+                </span>
+              </p>
+              <p>
+                <span class="rainbow-text">Voting Runs:</span>
+                <br>
+                <span>
+                  <%= l voting_starts %> - <br>
+                  <%= l voting_ends %>
+                </span>
+              </p>
+              <% if within_nominations_period? && current_user.candidate? %>
+                <div class="fixed-action-btn click-to-toggle">
+                  <span class="btn-floating btn-large" title="Your Candidacy Options">
+                    <i class='mdi mdi-menu rainbow mdi-36px'></i>
+                  </span>
+                  <ul>
+                    <%= link_to current_user.candidate, method: :delete do %>
+                      <li><span class="btn-floating mineral click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
+                    <% end %>
+                    <%= link_to edit_candidate_path(current_user.candidate) do %>
+                      <li><span class="btn-floating sapphire click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% else %>
+                <% if within_nominations_period? %>
+                  <p>Hi there! Want to run for the Board of Columbus Ruby Brigade?</p>
+                  <%= link_to 'Add yourself as a candidate!', new_candidate_path, class: 'waves-effect waves-light btn center-align' %>
                 <% end %>
-                <%= link_to edit_candidate_path(current_user.candidate) do %>
-                  <li><span class="btn-floating sapphire click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
-                <% end %>
-              </ul>
-              </div>
-          <% else %>
-            <% if within_nominations_period? %>
-              <p>Hi there! Want to run for the Board of Columbus Ruby Brigade?</p>
-              <%= link_to 'Add yourself as a candidate!', new_candidate_path, class: 'waves-effect waves-light btn center-align' %>
+              <% end %>
+            <% end %>
+            <% if voting_over? %>
+              <p>
+                <span class="rainbow-text">Voting is over. Congratulations to our new board members!</span><br>
+              </p>
             <% end %>
           </div>
-          <% end %>
 
         <div class="row card-container">
-          <% @candidates.each do |candidate| %>
+          <% @candidate.each do |candidate| %>
             <div class="col">
               <div class="card card-panel">
                 <div>
@@ -46,7 +69,7 @@
            
                 <div class="card-content left-align">
                   <p>
-                    <span class="card-title rainbow-text"><%= candidate.first_name + ' ' + candidate.last_name %> </span>
+                    <span class="card-title rainbow-text"><%= candidate.full_name %> </span>
                   </p>
                   <p>
                     <span class="rainbow-text">Bio:</span><br>
@@ -73,11 +96,14 @@
                     <% if current_user.votes.exists?(candidate: candidate) %>
                       <%= button_to 'Remove Vote', { action: 'vote', id: candidate.id }, class: 'btn-vote-remove extra-margin waves-effect waves-light btn center-align' %>
                     <% else %>
-                      <%= button_to 'Vote', { action: 'vote', id: candidate.id }, class: 'btn-vote-add add extra-margin waves-effect waves-light btn center-align' %>
+                      <%= button_to 'Vote', { action: 'vote', id: candidate.id }, class: 'btn-vote-add extra-margin waves-effect waves-light btn center-align' %>
                     <% end %>
-                    This will be removed in the final version. It is here for test purposes.<br>
-                    <span class="test-text" title="Vote"><%= candidate.votes.count %>
-                    <i class='mdi mdi-vote mdi-24px'></i></span>
+                  <% end %>
+                  <% if voting_over? %>
+                    <p>
+                      <span class="test-text" title="Vote"><%= candidate.votes_count %>
+                      <i class='mdi mdi-vote mdi-24px'></i></span>
+                    </p>
                   <% end %>
                 </div>
               </div>
