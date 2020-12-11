@@ -96,7 +96,7 @@ class CandidatesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def candidate_params
     params.require(:candidate)
-          .permit(:first_name, :last_name, :bio, :professional, :picture, :why)
+          .permit(:first_name, :last_name, :bio, :professional, :why)
           .merge(user_id: current_user.id)
   end
 

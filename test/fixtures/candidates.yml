@@ -5,7 +5,6 @@ one:
   last_name: MyString
   bio: MyText
   professional: false
-  picture: MyString
   why: MyText
   user: one
 
@@ -14,6 +13,5 @@ two:
   last_name: MyString
   bio: MyText
   professional: false
-  picture: MyString
   why: MyText
   user: two

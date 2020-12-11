@@ -17,7 +17,6 @@ class CandidatesTest < ApplicationSystemTestCase
     fill_in "Bio", with: @candidate.bio
     fill_in "First name", with: @candidate.first_name
     fill_in "Last name", with: @candidate.last_name
-    fill_in "Picture", with: @candidate.picture
     check "Professional" if @candidate.professional
     fill_in "User", with: @candidate.user_id
     fill_in "Why", with: @candidate.why
@@ -34,7 +33,6 @@ class CandidatesTest < ApplicationSystemTestCase
     fill_in "Bio", with: @candidate.bio
     fill_in "First name", with: @candidate.first_name
     fill_in "Last name", with: @candidate.last_name
-    fill_in "Picture", with: @candidate.picture
     check "Professional" if @candidate.professional
     fill_in "User", with: @candidate.user_id
     fill_in "Why", with: @candidate.why
