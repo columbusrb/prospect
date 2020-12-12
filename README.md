@@ -43,7 +43,7 @@ $ rails s
 
 ## Dependencies
 * Must be integrated with Slack in order to successfully login.
-* .env file must be included in order to set dates. The variables and date formatting as as follows:
+* .env file must be included in order to set dates. The variables and date formatting as follows:
 ```
 NOMINATIONS_START_DATE=2020-MM-DD
 NOMINATIONS_END_DATE=2020-MM-DD
