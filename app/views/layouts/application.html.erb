@@ -14,7 +14,7 @@
       <nav class="nav-extended">
       <div class="nav-wrapper nav-padding">
         <%= link_to root_path do %>
-          <%= image_tag("http://www.columbusrb.com/assets/logo-f727f91265179e80f6d7e78aa594c4a0474135ad1d8158d342d45dbccad73b67.png", class: "shrink-logo", alt: "Columbus Ruby Brigade Logo") %>
+          <%= image_tag("crb_logo_prospect.png", class: "shrink-logo", alt: "Columbus Ruby Brigade Logo") %>
         <% end %>
         <ul id="nav" class="right push-left">
           <% if user_signed_in? %>
@@ -68,13 +68,12 @@
   </footer>
 
   </body>
-
-  <% unless flash.empty? %>
-    <script type="text/javascript">
-      <% flash.each do |f| %>
-        <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
-          toastr['<%= type %>']('<%= f[1] %>');
-      <% end %>
-    </script>
-  <% end %>
+  <script type="text/javascript">
+    <% unless flash.empty? %>
+        <% flash.each do |f| %>
+          <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+            toastr['<%= type %>']('<%= f[1] %>');
+        <% end %>
+    <% end %>
+  </script>
 </html>
