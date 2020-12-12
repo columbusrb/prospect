@@ -1,17 +1,49 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  bio: MyText
+  first_name: First
+  last_name: One
+  bio: First bio text
   professional: false
-  why: MyText
+  why: First why text
   user: one
 
 two:
-  first_name: MyString
-  last_name: MyString
-  bio: MyText
+  first_name: Second
+  last_name: Two
+  bio: Second bio text
   professional: false
-  why: MyText
+  why: Second why text
   user: two
+
+three:
+  first_name: Third
+  last_name: Three
+  bio: Third bio text
+  professional: true
+  why: Third why text
+  user: three
+
+four:
+  first_name: Fourth
+  last_name: Four
+  bio: Fourth bio text
+  professional: true
+  why: Fourth why text
+  user: four
+
+five:
+  first_name: Fifth
+  last_name: Five
+  bio: Fifth bio text
+  professional: true
+  why: Fifth why text
+  user: five
+
+six:
+  first_name: Sixth
+  last_name: Six
+  bio: Sixth bio text
+  professional: true
+  why: Sixth why text
+  user: six

@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test '#candidate? returns false if user is not a candidate' do
+    user_seven = users(:seven)
+    assert_not user_seven.candidate?
+  end
+
+  test '#candidate? returns true if user is a candidate' do
+    user_one = users(:one)
+    assert user_one.candidate?
+  end
 end

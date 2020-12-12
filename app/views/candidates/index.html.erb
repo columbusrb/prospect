@@ -9,7 +9,10 @@
             <% Candidate.new_board_members.each do |b| %>
               <p>
                 <ul>
-                  <li><span class="rainbow-text"><i class="mdi mdi-ruby mdi-12px"></i></span> <%= b %></li>
+                  <li><span class="rainbow-text">
+                    <i class="mdi mdi-ruby mdi-12px"></i></span>
+                    <%= b.full_name %>
+                  </li>
                 </ul>
               </p>
             <% end %>
