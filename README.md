@@ -10,6 +10,7 @@
 
 ## General Information
 This application was made for the Columbus Ruby Brigade in order to combine board member nominations and voting into a single platform.
+This application is dark-mode friendly.
 
 ## Technology
 This project was created with and reliant upon:
@@ -38,6 +39,8 @@ $ rails s
 ```
 * If changes are made to the seed file for local testing purposes, drop the database first, then re-create it. The server will need to be re-started.
 
+* Because this application is dark mode-friendly, you may want to adjust your rendering for testing purposes using Dev tools (Chrome: Rendering > Emulate CSS media feature prefers-color-scheme).
+
 ## Dependencies
 * Must be integrated with Slack in order to successfully login.
 * .env file must be included in order to set dates. The variables and date formatting as as follows:
@@ -47,9 +50,10 @@ NOMINATIONS_END_DATE=2020-MM-DD
 VOTING_START_DATE=2020-MM-DD
 VOTING_END_DATE=2020-MM-DD
 ```
+* Secret keys, client ID, etc. must be obtained from Slack via the Admin. panel.
+
 
 ## Deployment
 * Heroku
 
 ## ToDo:
-* TBD
