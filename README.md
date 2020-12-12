@@ -1,5 +1,7 @@
 # Prospect README
 
+![](app/assets/images/crb_logo_prospect.png)
+
 ## Table of Contents
 * [General Information](#general-information)
 * [Technology](#technology)
@@ -57,3 +59,6 @@ VOTING_END_DATE=2020-MM-DD
 * Heroku
 
 ## ToDo:
+* Add controller tests
+
+![](app/assets/images/crb_prospect_scatter.png)
