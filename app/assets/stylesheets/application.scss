@@ -1,18 +1,20 @@
 @import "materialize/components/color-variables";
 // variable changes MUST go here for styling
-$primary-color: color("deep-purple", "darken-3") !default;
-$secondary-color: color("pink", "accent-2") !default;
-$tertiary-color: color("amber", "darken-2");
-$purple-color: color("purple", "darken-2");
-$red-accent: color("red", "accent-3");
-$pink-accent: color("pink", "accent-3");
-$yellow-accent: color("orange", "accent-3");
-$orange-accent: color("deep-orange", "accent-3");
-$indigo-accent: color("indigo", "darken-2");
-$purple-accent: color("deep-purple", "accent-2");
-$green-accent: color("lime", "darken-2");
-$blue-accent: color("blue", "darken-4");
-$link-color: color("pink", "accent-2") !default;
+$pink-1: rgb(187,19,88);
+$pink-2: rgb(162,20,93);
+$orange-1: rgb(244,74,31);
+$orange-2: rgb(228,64,32);
+$yellow-1: rgb(238,143,1);
+$yellow-2: rgb(250,99,15);
+$blue-1: rgb(16,66,242);
+$blue-2: rgb(4,110,201);
+$purple-1: rgb(113,47,234);
+$purple-2: rgb(87,41,223);
+$logo-gray: #494A50;
+$dark-gray: #242427;
+$link-color: #7D7D84 !default;
+$primary-color: rgb(238,143,1) !default;
+$secondary-color: rgb(162,20,93) !default;
 @import "materialize";
 @import "materialdesignicons";
 
@@ -29,7 +31,7 @@ main {
 }
 
 nav {
-  background: linear-gradient(145deg, $primary-color, $purple-color, $secondary-color);
+  background: linear-gradient(145deg, $logo-gray, $dark-gray);
   height: 64px !important;
   .shrink-logo {
     max-width: 100px;
@@ -50,7 +52,7 @@ nav {
 }
 
 footer {
-  background: linear-gradient(145deg, $primary-color, $purple-color);
+  background: linear-gradient(145deg, $logo-gray, $dark-gray);
   padding-top: 1em;
   position: relative;
   bottom: 0 !important;
@@ -76,25 +78,9 @@ footer {
   }
 }
 
-.margin-box {
-  margin-top: 2em;
-  margin-bottom: 4em;
-}
-
-.extra-margin {
-  margin-top: 1.75em;
-}
-
-.btn-vote-remove {
-  background-color: $yellow-accent;
-}
-.btn-vote-add {
-  background-color: $indigo-accent;
-}
-
 .candidate-picture {
   margin: 0 auto;
-  background-color: $primary-color;
+  background-color: $blue-2;
   background-size: cover;
   background-position: center;
   width: 250px;
@@ -107,6 +93,15 @@ footer {
 }
 
 div {
+  .btn {
+    background: linear-gradient(22deg, $blue-1, $purple-1);
+  }
+  .btn-vote-add {
+    background: linear-gradient(122deg, $purple-2, $purple-1);
+  }
+  .btn-vote-remove {
+    background: linear-gradient(166deg, $orange-2, $orange-1);
+  }
   .card-container {
     column-width: 22rem;
     -moz-column-width: 22rem;
@@ -143,44 +138,50 @@ div {
   }
 }
 
+
+.margin-box {
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+.extra-margin {
+  margin-top: 1.75em;
+}
+
+h1 {
+  color: $logo-gray;
+}
+
 .row .col{
   float: none !important;
   margin-left: auto;
   margin-right: auto;
 }
 
-.rainbow {
-  background: linear-gradient(43deg, $secondary-color, $tertiary-color);
-}
-
 .rainbow-text {
-  background: linear-gradient(22deg, $primary-color, $secondary-color);
+  background: linear-gradient(22deg, $orange-1, $yellow-1);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 800;
 }
 
-.sapphire {
-  background: linear-gradient(65deg, $indigo-accent, $purple-accent);
-}
-
-.mineral {
-  background: linear-gradient(77deg, $green-accent, $blue-accent);
-}
-
 .ruby {
-  background: linear-gradient(to right, $red-accent, $secondary-color, $pink-accent);
+  background: linear-gradient(to right, $pink-1, $pink-2);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.bee {
-  background: linear-gradient(to right, $yellow-accent, $orange-accent);
+.yellow-gradient-text {
+  background: linear-gradient(to right, $yellow-1, $yellow-2);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.yellow-gradient {
+  background: linear-gradient(to right, $yellow-1, $yellow-2);
 }
 
 .mdi:before {
@@ -189,4 +190,76 @@ div {
 
 .mdi-arrow-left::before {
   font-weight: 800;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+  background: #0E0E0F;
+  color: #eee;
+  }
+  nav {
+    background: linear-gradient(145deg, darken($logo-gray, 30%), darken($dark-gray, 30%));
+  }
+  footer {
+      background: linear-gradient(145deg, darken($logo-gray, 30%), darken($dark-gray, 30%));
+  }
+  h1 {
+    color: lighten($logo-gray, 20%);
+  }
+  .card {
+    background-color: #141414;
+  }
+  .candidate-picture {
+    background-color: darken($blue-2, 20%);
+    border-color: #0E0E0F;
+  }
+  input {
+    color: #ddd;
+  }
+  textarea {
+    color: #ddd;
+  }
+  div {
+    .btn {
+      background: linear-gradient(22deg, darken($blue-1, 20%), darken($purple-1, 20%));
+    }
+    .btn-vote-add {
+      background: linear-gradient(122deg, darken($purple-2, 20%), darken($purple-1, 20%));
+    }
+    .btn-vote-remove {
+      background: linear-gradient(166deg, darken($orange-2, 10%), darken($orange-1, 10%));
+    }
+    .rainbow-text {
+      background: linear-gradient(22deg, darken($orange-1, 10%), lighten($yellow-1, 15%));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+  }
+  .ruby {
+    background: linear-gradient(to right, lighten($pink-1, 20%), lighten($pink-2, 20%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .yellow-gradient-text {
+    background: linear-gradient(to right, lighten($yellow-1, 15%), lighten($yellow-2, 15%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .yellow-gradient {
+    background: linear-gradient(to right, lighten($yellow-1, 15%), lighten($yellow-2, 15%));
+  }
+
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: white;
+    color: #333;
+  }
 }

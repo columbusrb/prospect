@@ -27,7 +27,7 @@
           <% if @candidate.professional == true %>
             <span class="professional-grade ruby" title="Someone with 3+ years of experience in a technical role"><i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional</span>
           <% else %>
-            <span class="professional-grade bee" title="New professional with less than 3 years of experience in a technical role or non-developer"><i class="mdi mdi-bee mdi-12px"></i> New Professional || Non-technical</span>
+            <span class="professional-grade yellow-gradient-text" title="New professional with less than 3 years of experience in a technical role or non-developer"><i class="mdi mdi-bee mdi-12px"></i> New Professional || Non-technical</span>
           <% end %>
         </p>
       </div>
@@ -43,10 +43,10 @@
           </span>
           <ul>
             <%= link_to @candidate, method: :delete do %>
-              <li><span class="btn-floating mineral click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
+              <li><span class="btn-floating yellow-gradient click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
             <% end %>
             <%= link_to edit_candidate_path(@candidate) do %>
-              <li><span class="btn-floating sapphire click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
+              <li><span class="btn-floating yellow-gradient click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
             <% end %>
           </ul>
           </div>
@@ -56,7 +56,7 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('turbolinks:load', function() {
     var elems = document.querySelectorAll('.fixed-action-btn');
     var instances = M.FloatingActionButton.init(elems, {
       direction: 'left',
