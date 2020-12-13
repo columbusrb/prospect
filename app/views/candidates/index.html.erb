@@ -1,121 +1,122 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1>Candidates</h1>
-
-          <div class="margin-box left-align">
-            <% if voting_over? %>
-            <span class="rainbow-text">Congratulations to Our New Board!</span>
-            <% Candidate.new_board_members.each do |b| %>
-              <p>
-                <ul>
-                  <li><span class="rainbow-text">
-                    <i class="mdi mdi-ruby mdi-12px"></i></span>
-                    <%= b.full_name %>
-                  </li>
-                </ul>
-              </p>
-            <% end %>
-            <% end %>
-            <% unless voting_over? %>
-              <p>
-                <span class="rainbow-text">Nominations Run:</span>
-                <br>
-                <span>
-                  <%= l nominations_starts %> - <br> 
-                  <%= l nominations_ends %>
-                </span>
-              </p>
-              <p>
-                <span class="rainbow-text">Voting Runs:</span>
-                <br>
-                <span>
-                  <%= l voting_starts %> - <br>
-                  <%= l voting_ends %>
-                </span>
-              </p>
-              <% if within_nominations_period? && current_user.candidate? %>
-                <div class="fixed-action-btn click-to-toggle">
-                  <span class="btn-floating btn-large" title="Your Candidacy Options">
-                    <i class='mdi mdi-menu rainbow mdi-36px'></i>
-                  </span>
-                  <ul>
-                    <%= link_to current_user.candidate, method: :delete do %>
-                      <li><span class="btn-floating yellow-gradient click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
-                    <% end %>
-                    <%= link_to edit_candidate_path(current_user.candidate) do %>
-                      <li><span class="btn-floating yellow-gradient click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
-                    <% end %>
-                  </ul>
+      <% if voting_over? %>
+        <h1>Congratulations!</h1>
+            <div class="row card-container">
+              <% Candidate.new_board_members.each do |b| %>
+                <div class="col">
+                  <div class="card card-panel">
+                    <div class="candidate-picture" style="background-image: url(<%= b.user.avatar_url %>);"></div>
+                    <div class="card-content">
+                      <% if b.professional == true %>
+                        <span class="card-title ruby center-align"><%= b.full_name %></span>
+                      <% else %>
+                        <span class="card-title yellow-gradient-text center-align"><%= b.full_name %></span>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
-              <% else %>
-                <% if within_nominations_period? %>
-                  <p>Hi there! Want to run for the Board of Columbus Ruby Brigade?</p>
-                  <%= link_to 'Add yourself as a candidate!', new_candidate_path, class: 'waves-effect waves-light btn center-align' %>
+              <% end %>
+            </div>
+      <% else %>
+        <h1>Candidates</h1>
+            <div class="margin-box left-align">              
+              <% unless voting_over? %>
+                <p>
+                  <span class="rainbow-text">Nominations Run:</span>
+                  <br>
+                  <span>
+                    <%= l nominations_starts %> - <br> 
+                    <%= l nominations_ends %>
+                  </span>
+                </p>
+                <p>
+                  <span class="rainbow-text">Voting Runs:</span>
+                  <br>
+                  <span>
+                    <%= l voting_starts %> - <br>
+                    <%= l voting_ends %>
+                  </span>
+                </p>
+                <% if within_nominations_period? && current_user.candidate? %>
+                  <div class="fixed-action-btn click-to-toggle">
+                    <span class="btn-floating btn-large" title="Your Candidacy Options">
+                      <i class='mdi mdi-menu rainbow mdi-36px'></i>
+                    </span>
+                    <ul>
+                      <%= link_to current_user.candidate, method: :delete do %>
+                        <li><span class="btn-floating yellow-gradient click-to-toggle" title="Delete your entry"><i class="mdi mdi-trash-can mdi-12px"></i></span></li>
+                      <% end %>
+                      <%= link_to edit_candidate_path(current_user.candidate) do %>
+                        <li><span class="btn-floating yellow-gradient click-to-toggle" title="Edit your entry"><i class='mdi mdi-pencil mdi-12px'></i></span></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% else %>
+                  <% if within_nominations_period? %>
+                    <p>Hi there! Want to run for the Board of Columbus Ruby Brigade?</p>
+                    <%= link_to 'Add yourself as a candidate!', new_candidate_path, class: 'waves-effect waves-light btn center-align' %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-            <% if voting_over? %>
-              <p>
-                <span class="rainbow-text">Voting is over. Congratulations to our new board members!</span><br>
-              </p>
-            <% end %>
-          </div>
+            </div>
 
-        <div class="row card-container">
-          <% @candidate.each do |candidate| %>
-            <div class="col">
-              <div class="card card-panel">
-                <div>
-                  <div class="candidate-picture" style="background-image: url(<%= candidate.user.avatar_url %>);">
-                </div>
-           
-                <div class="card-content left-align">
-                  <p>
-                    <span class="card-title rainbow-text"><%= candidate.full_name %> </span>
-                  </p>
-                  <p>
-                    <span class="rainbow-text">Bio:</span><br>
-                    <%= truncate(candidate.bio, length: 220) %>
-                  </p>
-                  <p>
-                    <span class="rainbow-text">Why <%= candidate.first_name %> Is Running:</span><br>
-                    <%= truncate(candidate.why, length: 220) %>
-                  </p>
-                  
-                  <% if candidate.professional == true %>
-                    <span class="professional-grade ruby" title="Someone with 3+ years of experience in a technical role">
-                      <i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional
-                    </span>
-                  <% else %>
-                    <span class="professional-grade yellow-gradient-text" title="New professional with less than 3 years of experience in a technical role or non-developer">
-                      <i class="mdi mdi-bee mdi-12px"></i> New Professional || Non-technical
-                    </span>
-                  <% end %>
-
-                <div class="card-action extra-margin center-align">
-                  <%= link_to 'View Candidate Profile', candidate, class: 'waves-effect waves-light btn center-align' %>
-                  <% if within_voting_period? %>
-                    <% if current_user.votes.exists?(candidate: candidate) %>
-                      <%= button_to 'Remove Vote', { action: 'vote', id: candidate.id }, class: 'btn-vote-remove extra-margin waves-effect waves-light btn center-align' %>
-                    <% else %>
-                      <%= button_to 'Vote', { action: 'vote', id: candidate.id }, class: 'btn-vote-add extra-margin waves-effect waves-light btn center-align' %>
-                    <% end %>
-                  <% end %>
-                  <% if voting_over? %>
+          <div class="row card-container">
+            <% @candidate.each do |candidate| %>
+              <div class="col">
+                <div class="card card-panel">
+                  <div>
+                    <div class="candidate-picture" style="background-image: url(<%= candidate.user.avatar_url %>);">
+                  </div>
+            
+                  <div class="card-content left-align">
                     <p>
-                      <span class="test-text" title="Vote"><%= candidate.votes_count %>
-                      <i class='mdi mdi-vote mdi-24px'></i></span>
+                      <span class="card-title rainbow-text"><%= candidate.full_name %> </span>
                     </p>
-                  <% end %>
+                    <p>
+                      <span class="rainbow-text">Bio:</span><br>
+                      <%= truncate(candidate.bio, length: 220) %>
+                    </p>
+                    <p>
+                      <span class="rainbow-text">Why <%= candidate.first_name %> Is Running:</span><br>
+                      <%= truncate(candidate.why, length: 220) %>
+                    </p>
+                    
+                    <% if candidate.professional == true %>
+                      <span class="professional-grade ruby" title="Someone with 3+ years of experience in a technical role">
+                        <i class="mdi mdi-ruby mdi-12px"></i> Ruby Professional
+                      </span>
+                    <% else %>
+                      <span class="professional-grade yellow-gradient-text" title="New professional with less than 3 years of experience in a technical role or non-developer">
+                        <i class="mdi mdi-ruby mdi-12px"></i> New Professional || Non-technical
+                      </span>
+                    <% end %>
+
+                  <div class="card-action extra-margin center-align">
+                    <%= link_to 'View Candidate Profile', candidate, class: 'waves-effect waves-light btn center-align' %>
+                    <% if within_voting_period? %>
+                      <% if current_user.votes.exists?(candidate: candidate) %>
+                        <%= button_to 'Remove Vote', { action: 'vote', id: candidate.id }, class: 'btn-vote-remove extra-margin waves-effect waves-light btn center-align' %>
+                      <% else %>
+                        <%= button_to 'Vote', { action: 'vote', id: candidate.id }, class: 'btn-vote-add extra-margin waves-effect waves-light btn center-align' %>
+                      <% end %>
+                    <% end %>
+                    <% if voting_over? %>
+                      <p>
+                        <span class="test-text" title="Vote"><%= candidate.votes_count %>
+                        <i class='mdi mdi-vote mdi-24px'></i></span>
+                      </p>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+            <% end %>
+          </div>
         </div>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

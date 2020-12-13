@@ -8,9 +8,11 @@
           We dig <span class="ruby">Ruby</span> and we dig elections! This is the voting module for <a href="https://columbusrb.com" target="_blank">Columbus Ruby Brigade.</a><br>
           You can register as a candidate, view candidates' posted information, and vote (when it's open).
         </p>
-        <p>
-          Log in with your Slack account. You need to join CRB's <a href="https://crb-slack-invite.herokuapp.com/" target="_blank">Slack</a> in order to run as a candidate and vote.
-        </p>
+        <% unless signed_in? %>
+          <p>
+            Log in with your Slack account. You need to join CRB's <a href="https://crb-slack-invite.herokuapp.com/" target="_blank">Slack</a> in order to run as a candidate and vote.
+          </p>
+        <% end %>
       <% unless voting_over? %>
         <p>
           <span class="rainbow-text">Nominations Run:</span> <br>

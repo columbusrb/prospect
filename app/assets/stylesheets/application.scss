@@ -15,10 +15,10 @@ $dark-gray: #242427;
 $link-color: #7D7D84 !default;
 $primary-color: rgb(238,143,1) !default;
 $secondary-color: rgb(162,20,93) !default;
+$dark-mode: #0E0E0F;
 @import "materialize";
 @import "materialdesignicons";
-
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap');
 
 body {
   display: flex;
@@ -83,8 +83,10 @@ footer {
   background-color: $blue-2;
   background-size: cover;
   background-position: center;
-  width: 250px;
-  height: 250px;
+  min-width: 16em;
+  min-height: 16em;
+  max-width: 16em;
+  max-height: 16em;
   padding: 15px;
   margin-top: 22px;
   border-radius: 50%;
@@ -121,9 +123,6 @@ div {
       display: block;
       font-size: .89em;
       min-height: 2em;
-      .mdi-bee::before{
-        font-size: 16pt;
-      }
     }
     .center-button {
       display: flex;
@@ -134,10 +133,10 @@ div {
       margin: 0 auto;
       color: black;
       font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
     }
   }
 }
-
 
 .margin-box {
   margin-top: 2em;
@@ -150,6 +149,13 @@ div {
 
 h1 {
   color: $logo-gray;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 
 .row .col{
@@ -163,7 +169,9 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-weight: 800;
+  font-weight: 300;
+  font-family: 'Montserrat', sans-serif;
+
 }
 
 .ruby {
@@ -171,6 +179,8 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 
 .yellow-gradient-text {
@@ -178,6 +188,8 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 
 .yellow-gradient {
@@ -194,7 +206,7 @@ h1 {
 
 @media (prefers-color-scheme: dark) {
   body {
-  background: #0E0E0F;
+  background: $dark-mode;
   color: #eee;
   }
   nav {
@@ -207,11 +219,11 @@ h1 {
     color: lighten($logo-gray, 20%);
   }
   .card {
-    background-color: #141414;
+    background-color: lighten($dark-mode, 1%);
   }
   .candidate-picture {
     background-color: darken($blue-2, 20%);
-    border-color: #0E0E0F;
+    border-color: $dark-mode;
   }
   input {
     color: #ddd;
