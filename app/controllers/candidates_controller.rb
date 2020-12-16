@@ -15,6 +15,9 @@ class CandidatesController < ApplicationController
       end
   end
 
+  def edit
+  end
+
   # GET /candidates/new
   def new
     if helpers.within_nominations_period?
@@ -101,7 +104,8 @@ class CandidatesController < ApplicationController
   end
 
   def verify_owner
-    return @candidate.user_id == current_user.id
+    return if @candidate.user_id == current_user.id
+
     flash[:warning] = 'You can only make changes to your own candidacy.'
     redirect_to candidates_path
   end

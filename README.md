@@ -59,6 +59,6 @@ VOTING_END_DATE=2020-MM-DD
 * Heroku
 
 ## ToDo:
-* Add controller tests
+* TBD
 
 ![](app/assets/images/crb_prospect_scatter.png)
