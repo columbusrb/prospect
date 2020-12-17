@@ -10,9 +10,4 @@ class UserTest < ActiveSupport::TestCase
     user = users(:one)
     assert user.candidate?
   end
-
-  test '#candidate? returns true if user is a candidate' do
-    user = users(:one)
-    assert user.candidate?
-  end
 end
