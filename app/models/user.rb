@@ -16,6 +16,10 @@ class User < ApplicationRecord
     user
   end
 
+  def self.max_vote_count
+    ENV['MAX_VOTE_COUNT']&.to_i || 5
+  end
+
   def candidate?
     candidate.present?
   end

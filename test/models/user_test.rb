@@ -10,4 +10,9 @@ class UserTest < ActiveSupport::TestCase
     user = users(:one)
     assert user.candidate?
   end
+
+  test 'gets MAX_VOTE_COUNT from env variable' do
+    ENV.stubs(:[]).with('MAX_VOTE_COUNT').returns('6')
+    assert_equal 6, User.max_vote_count
+  end
 end

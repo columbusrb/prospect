@@ -96,7 +96,7 @@ class CandidatesController < ApplicationController
 
   def voting_for_candidate
     if user_vote_count
-      redirect_to candidates_path, notice: "You've hit your maximum (#{@maximum_votes}) number of allowed votes."
+      redirect_to candidates_path, notice: "You've hit your maximum (#{User.max_vote_count}) number of allowed votes."
     else
       vote = current_user.votes.find_by(candidate: @candidate)
       if vote.present?
@@ -109,8 +109,7 @@ class CandidatesController < ApplicationController
   end
 
   def user_vote_count
-    @maximum_votes = 5
-    current_user.votes.count >= @maximum_votes
+    current_user.votes.count >= User.max_vote_count
   end
 
   def create_user_vote

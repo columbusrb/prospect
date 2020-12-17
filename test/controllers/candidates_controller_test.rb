@@ -164,7 +164,7 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
     CandidatesController.view_context_class.any_instance.stubs(:within_voting_period?).returns(true)
     post vote_candidate_url(@candidate)
     assert_response :redirect
-    assert_equal "You've hit your maximum (5) number of allowed votes.", flash[:notice]
+    assert_equal "You've hit your maximum (#{User.max_vote_count}) number of allowed votes.", flash[:notice]
   end
 
   test 'users cannot vote if voting is not open' do
