@@ -7,6 +7,7 @@
 * [Technology](#technology)
 * [Setup](#stepup)
 * [Dependencies](#dependencies)
+* [Tests](#tests)
 * [Deployment](#deployment)
 * [ToDo](#todo)
 
@@ -54,11 +55,22 @@ VOTING_END_DATE=2020-MM-DD
 ```
 * Secret keys, client ID, etc. must be obtained from Slack via the Admin. panel.
 
+## Tests
+* Minitest (built into Rails)
+* Mocha (primarily used to stub out .env dates and handle dates in testing more easily)
+* `test/fixtures/`
+
+* To run all tests
+```
+# Run tests
+$ rails test
+```
+* Coverage report can be found in `.../coverage/index.html` after running the tests.
 
 ## Deployment
 * Heroku
 
 ## ToDo:
-* TBD
+* Increase test coverage
 
 ![](app/assets/images/crb_prospect_scatter.png)
