@@ -7,7 +7,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test '#candidate? returns true if user is a candidate' do
-    user_one = users(:one)
-    assert user_one.candidate?
+    user = users(:one)
+    assert user.candidate?
+  end
+
+  test '#candidate? returns true if user is a candidate' do
+    user = users(:one)
+    assert user.candidate?
   end
 end

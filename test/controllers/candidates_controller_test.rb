@@ -30,17 +30,32 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
   test 'should create candidate' do
     sign_in users(:seven)
     assert_difference('Candidate.count') do
-      post candidates_url, params: { candidate: {
-        bio: @candidate.bio,
-        first_name: @candidate.first_name,
-        last_name: @candidate.last_name,
-        professional: @candidate.professional,
-        user_id: @candidate.user_id,
-        why: @candidate.why }
+      post candidates_url, params: {
+        candidate: {
+          bio: @candidate.bio,
+          first_name: @candidate.first_name,
+          last_name: @candidate.last_name,
+          professional: @candidate.professional,
+          why: @candidate.why
+        }
       }
     end
-
     assert_redirected_to candidate_url(Candidate.last)
+  end
+
+  test 'should not create candidate if there is an error' do
+    sign_in users(:seven)
+    assert_no_difference('Candidate.count') do
+      post candidates_url, params: {
+        candidate: {
+          bio: @candidate.bio,
+          first_name: @candidate.first_name,
+          last_name: @candidate.last_name,
+          professional: @candidate.professional,
+        }
+      }
+    end
+    assert_response :success
   end
 
   test 'should show candidate' do
@@ -64,21 +79,35 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update candidate' do
     sign_in @candidate.user
-    patch candidate_url(@candidate), params:
-    { candidate:
-      {
+    patch candidate_url(@candidate), params: {
+      candidate: {
         bio: @candidate.bio,
         first_name: @candidate.first_name,
         last_name: @candidate.last_name,
         professional: @candidate.professional,
-        user_id: @candidate.user_id,
         why: @candidate.why
-      } }
+      }
+    }
     assert_redirected_to candidate_url(@candidate)
   end
 
-  test 'should not update candidate' do
+  test "should not update candidate if it is not one's own" do
     sign_in users(:five)
+    patch candidate_url(@candidate), params: {
+      candidate: {
+        bio: @candidate.bio,
+        first_name: @candidate.first_name,
+        last_name: @candidate.last_name,
+        professional: @candidate.professional,
+        why: @candidate.why
+      }
+    }
+    assert_response :redirect
+    assert_equal 'You can only make changes to your own candidacy.', flash[:warning]
+  end
+
+  test 'should not update candidate if validation error occurs' do
+    sign_in users(:one)
     patch candidate_url(@candidate), params:
       { candidate:
         {
@@ -86,10 +115,10 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
           first_name: @candidate.first_name,
           last_name: @candidate.last_name,
           professional: @candidate.professional,
-          user_id: @candidate.user_id,
-          why: @candidate.why
+          why: ''
         } }
-    assert_response :redirect
+    assert_response :success
+    assert_not_equal '', @candidate.reload.why
   end
 
   test 'should destroy candidate' do
@@ -106,5 +135,44 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
       delete candidate_url(@candidate)
     end
     assert_response :redirect
+  end
+
+  test 'user should be able to vote' do
+    user = users(:two)
+    sign_in user
+    CandidatesController.view_context_class.any_instance.stubs(:within_voting_period?).returns(true)
+    post vote_candidate_url(@candidate)
+    assert_equal 'You voted! Yay!', flash[:notice]
+    assert user.votes.find_by(candidate: @candidate)
+    assert_response :redirect
+  end
+
+  test 'user should be able to remove vote' do
+    user = users(:one)
+    sign_in user
+    CandidatesController.view_context_class.any_instance.stubs(:within_voting_period?).returns(true)
+    post vote_candidate_url(@candidate)
+    assert_response :redirect
+    assert_equal 'You have removed your vote.', flash[:notice]
+    assert_not user.votes.find_by(candidate: @candidate)
+  end
+
+  test 'user should not be able to vote if they have cast more than five votes' do
+    user = users(:four)
+    sign_in user
+    assert_equal 5, user.votes.count
+    CandidatesController.view_context_class.any_instance.stubs(:within_voting_period?).returns(true)
+    post vote_candidate_url(@candidate)
+    assert_response :redirect
+    assert_equal "You've hit your maximum (5) number of allowed votes.", flash[:notice]
+  end
+
+  test 'users cannot vote if voting is not open' do
+    user = users(:one)
+    sign_in user
+    CandidatesController.view_context_class.any_instance.stubs(:within_voting_period?).returns(false)
+    post vote_candidate_url(@candidate)
+    assert_response :redirect
+    assert_equal 'Voting is not currently open; you cannot vote.', flash[:warning]
   end
 end

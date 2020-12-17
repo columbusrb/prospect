@@ -7,12 +7,7 @@ class CandidatesController < ApplicationController
   # GET /candidates
   # GET /candidates.json
   def index
-    @candidate =
-      if helpers.voting_over?
-        Candidate.all.order(vote_count: :desc)
-      else
-        Candidate.all.order(last_name: :desc)
-      end
+    @candidate = Candidate.all.order(last_name: :desc)
   end
 
   def edit
@@ -71,7 +66,7 @@ class CandidatesController < ApplicationController
   # POST /candidates/1/vote
   def vote
     if helpers.within_voting_period?
-      if current_user.votes.count > 5
+      if current_user.votes.count >= 5
         redirect_to candidates_path, notice: "You've hit your maximum (5) number of allowed votes."
       else
         vote = current_user.votes.find_by(candidate: @candidate)
