@@ -66,18 +66,7 @@ class CandidatesController < ApplicationController
   # POST /candidates/1/vote
   def vote
     if helpers.within_voting_period?
-      if current_user.votes.count >= 5
-        redirect_to candidates_path, notice: "You've hit your maximum (5) number of allowed votes."
-      else
-        vote = current_user.votes.find_by(candidate: @candidate)
-        if vote.present?
-          vote.destroy!
-          redirect_to candidates_path, notice: 'You have removed your vote.'
-        else
-          current_user.votes.create!(candidate: @candidate)
-          redirect_to candidates_path, notice: 'You voted! Yay!'
-        end
-      end
+      voting_for_candidate
     else
       flash[:warning] = 'Voting is not currently open; you cannot vote.'
       redirect_to candidates_path
@@ -103,5 +92,29 @@ class CandidatesController < ApplicationController
 
     flash[:warning] = 'You can only make changes to your own candidacy.'
     redirect_to candidates_path
+  end
+
+  def voting_for_candidate
+    if user_vote_count
+      redirect_to candidates_path, notice: "You've hit your maximum (#{@maximum_votes}) number of allowed votes."
+    else
+      vote = current_user.votes.find_by(candidate: @candidate)
+      if vote.present?
+        vote.destroy!
+        redirect_to candidates_path, notice: 'You have removed your vote.'
+      else
+        create_user_vote
+      end
+    end
+  end
+
+  def user_vote_count
+    @maximum_votes = 5
+    current_user.votes.count >= @maximum_votes
+  end
+
+  def create_user_vote
+    current_user.votes.create!(candidate: @candidate)
+    redirect_to candidates_path, notice: 'You voted! Yay!'
   end
 end
