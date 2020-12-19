@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CandidateTest < ActiveSupport::TestCase
@@ -8,25 +10,25 @@ class CandidateTest < ActiveSupport::TestCase
   end
 
   test 'first_name is required for candidate' do
-    candidate = Candidate.new()
+    candidate = Candidate.new
     assert_not candidate.valid?
     assert_equal "can't be blank", candidate.errors[:first_name].first
   end
 
   test 'last_name is required for candidate' do
-    candidate = Candidate.new()
+    candidate = Candidate.new
     assert_not candidate.valid?
     assert_equal "can't be blank", candidate.errors[:last_name].first
   end
 
   test 'bio is required for candidate' do
-    candidate = Candidate.new()
+    candidate = Candidate.new
     assert_not candidate.valid?
     assert_equal "can't be blank", candidate.errors[:bio].first
   end
 
   test 'why (reason for running) is required for candidate' do
-    candidate = Candidate.new()
+    candidate = Candidate.new
     assert_not candidate.valid?
     assert_equal "can't be blank", candidate.errors[:why].first
   end

@@ -10,8 +10,7 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.all.order(last_name: :desc)
   end
 
-  def edit
-  end
+  def edit; end
 
   # GET /candidates/new
   def new
