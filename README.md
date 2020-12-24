@@ -17,8 +17,8 @@ This application is dark-mode friendly.
 
 ## Technology
 This project was created with and reliant upon:
-* Ruby 2.6.5
-* Rails 6.0.3.4
+* Ruby 2.7.2
+* Rails 6.1
 * Materialize-Sass
 * Material Design Icons
     - for icon names, reference MDI v. 4.1.95 docs
