@@ -1,0 +1,53 @@
+name: Continuous Integration
+
+on: [push]
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+  
+  tests:
+    name: Tests
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bundle exec rails yarn:install
+      - run: bundle exec rails test
+      - uses: aki77/simplecov-report-action@v1
+        name: Code coverage checker
+        with:
+          failedThreshold: 50
+          token: ${{ github.token }}
+        if: ${{ always() }}
+
+  rubocop:
+    name: RuboCop
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: |
+          git diff origin/master... --name-only --diff-filter=AM | \
+            xargs bundle exec rubocop \
+              --parallel \
+              --fail-level convention \
+              --display-only-fail-level-offenses \
+              --display-style-guide \
+              --force-exclusion \
+              --format progress \
+              --format github
