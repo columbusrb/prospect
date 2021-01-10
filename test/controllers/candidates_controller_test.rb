@@ -10,6 +10,10 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
+    CandidatesController.view_context_class.any_instance.stubs(:nominations_starts).returns(1.day.ago)
+    CandidatesController.view_context_class.any_instance.stubs(:nominations_ends).returns(1.day.from_now)
+    CandidatesController.view_context_class.any_instance.stubs(:voting_starts).returns(2.days.from_now)
+    CandidatesController.view_context_class.any_instance.stubs(:voting_ends).returns(3.days.from_now)
     sign_in users(:one)
     get candidates_url
     assert_response :success
@@ -53,7 +57,7 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
           bio: @candidate.bio,
           first_name: @candidate.first_name,
           last_name: @candidate.last_name,
-          professional: @candidate.professional,
+          professional: @candidate.professional
         }
       }
     end

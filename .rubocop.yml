@@ -1,0 +1,23 @@
+require:
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.7.2
+  NewCops: enable
+  Exclude:
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'db/migrate/**/*.rb'
+    - 'db/*.rb'
+    - 'config/**/*'
+    - 'config/*'
+    - 'bin/*'
+    - 'config.ru'
+    - 'Rakefile'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'test/**/*'
