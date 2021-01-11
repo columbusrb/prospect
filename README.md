@@ -68,7 +68,10 @@ $ rails test
 * Coverage report can be found in `.../coverage/index.html` after running the tests.
 
 ## Deployment
-* Heroku
+* CI will run first. 
+* Automatic deployments enabled.
+* To manually deploy to Heroku: Heroku `heroku  git:remote -a app-name-here`
+* Make sure to run `heroku run rails db:migrate` to create the database.
 
 ## ToDo:
 * Increase test coverage
