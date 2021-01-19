@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Helper methods for setting date-dependent features
 module CandidatesHelper
   def nominations_starts
@@ -17,14 +19,14 @@ module CandidatesHelper
   end
 
   def within_nominations_period?
-    (nominations_starts..nominations_ends).cover?(Date.today)
+    (nominations_starts..nominations_ends).cover?(Time.zone.today)
   end
 
   def within_voting_period?
-    (voting_starts..voting_ends).cover?(Date.today)
+    (voting_starts..voting_ends).cover?(Time.zone.today)
   end
 
   def voting_over?
-    Date.today > voting_ends
+    Time.zone.today > voting_ends
   end
 end

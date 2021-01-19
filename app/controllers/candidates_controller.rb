@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Candidates Controller
 class CandidatesController < ApplicationController
   before_action :set_candidate, only: %i[show edit update destroy vote]
   before_action :verify_owner, only: %i[edit update destroy]
@@ -9,6 +10,8 @@ class CandidatesController < ApplicationController
   def index
     @candidate = Candidate.all.order(last_name: :desc)
   end
+
+  def show; end
 
   def edit; end
 

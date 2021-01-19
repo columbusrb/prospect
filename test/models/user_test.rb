@@ -2,6 +2,7 @@
 
 require 'test_helper'
 
+# Runs tests against the User model
 class UserTest < ActiveSupport::TestCase
   test '#candidate? returns false if user is not a candidate' do
     user_seven = users(:seven)

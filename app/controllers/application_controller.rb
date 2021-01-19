@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Application Controller (sessions)
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!

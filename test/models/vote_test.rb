@@ -2,6 +2,7 @@
 
 require 'test_helper'
 
+# Tests Vote model
 class VoteTest < ActiveSupport::TestCase
   test 'can not vote for candidate more than once' do
     user = users(:one)

@@ -2,6 +2,7 @@
 
 require 'test_helper'
 
+# Tests Candidate model
 class CandidateTest < ActiveSupport::TestCase
   test 'user should be unique' do
     user = users(:one)

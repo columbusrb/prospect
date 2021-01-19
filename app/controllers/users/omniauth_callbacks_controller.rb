@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# User callbacks
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def slack
     @user = User.from_omniauth(request.env['omniauth.auth'])
