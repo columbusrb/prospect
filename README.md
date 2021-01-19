@@ -66,6 +66,13 @@ VOTING_END_DATE=2020-MM-DD
 $ rails test
 ```
 * Coverage report can be found in `.../coverage/index.html` after running the tests.
+* Do not listen to RuboCop for the following, because making said changes will break things.
+```
+ # Use nested module/class definitions instead of compact style on:
+ app/controllers/users/omniauth_callbacks_controller.rb
+ test/channels/application_cable/connection_test.rb
+ test/test_helper.rb
+```
 
 ## Deployment
 * CI will run first. 
