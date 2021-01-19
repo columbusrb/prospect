@@ -25,6 +25,7 @@ gem 'devise'
 gem 'jquery'
 gem 'material_design_icons'
 gem 'materialize-sass'
+gem 'omniauth', '>= 1.9', '< 2'
 gem 'omniauth-slack', github: 'kmrshntr/omniauth-slack'
 
 # Use Active Storage variant
