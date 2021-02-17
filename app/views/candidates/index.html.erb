@@ -23,6 +23,7 @@
         <h1>Candidates</h1>
             <div class="margin-box left-align">              
               <% unless voting_over? %>
+                <% if within_nominations_period? %>
                 <p>
                   <span class="rainbow-text">Nominations Run:</span>
                   <br>
@@ -31,6 +32,7 @@
                     <%= l nominations_ends %>
                   </span>
                 </p>
+                <% end %>
                 <p>
                   <span class="rainbow-text">Voting Runs:</span>
                   <br>
@@ -38,6 +40,18 @@
                     <%= l voting_starts %> - <br>
                     <%= l voting_ends %>
                   </span>
+                </p>
+                <p>
+                  <span class="rainbow-text">About Voting:</span><br>
+                  <%= "You've cast: #{current_user.votes.count} / #{User.max_vote_count}" %>
+                  <p>
+                  <ul>
+                    <li>Remember that you can vote for <%= "#{User.max_vote_count}" %> candidates for the CRB board.</li>
+                    <li>When we count the votes, the <%= "#{User.max_vote_count - 1}" %> highest voted candidates will be seated on the 2021/22 Board of Directors.</li>
+                    <li>If this includes someone who's day job isn't in tech, we'll also seat the <%= "#{User.max_vote_count.ordinalize}" %> highest voted candidate.</li>
+                    <li>If we have not filled the non-professional board seat, we will seat the highest voted non-professional candidate.</li>
+                  <ul>
+                  </p>
                 </p>
                 <% if within_nominations_period? && current_user.candidate? %>
                   <div class="fixed-action-btn click-to-toggle">
