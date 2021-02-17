@@ -2,6 +2,7 @@
 
 require 'test_helper'
 
+# tests for the Candidates Controller
 class CandidatesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
