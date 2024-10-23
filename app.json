@@ -7,6 +7,7 @@
     "VOTING_END_DATE": "2025-01-31",
 
     "LANG": "en_US.UTF-8",
+    "NODE_ENV": "production",
     "RAILS_ENV": "production",
     "RAILS_LOG_TO_STDOUT": "enabled",
     "RAILS_SERVE_STATIC_FILES": "enabled"
