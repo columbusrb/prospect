@@ -12,9 +12,5 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.11.0"
   },
-  "engines": {
-    "node": "21.6.2",
-    "yarn": "1.2.22"
-  },
   "version": "0.1.0"
 }
