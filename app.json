@@ -12,5 +12,6 @@
     "RAILS_LOG_TO_STDOUT": "enabled",
     "RAILS_SERVE_STATIC_FILES": "enabled"
   },
+  "buildpacks": [{ "url": "heroku/nodejs" }, { "url": "heroku/ruby" }],
   "stack": "heroku-24"
 }
