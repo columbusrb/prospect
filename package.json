@@ -1,5 +1,9 @@
 {
   "name": "prospect",
+  "engines": {
+    "node": "20.9.0",
+    "yarn": "1.22.19"
+  },
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
