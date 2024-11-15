@@ -1,0 +1,18 @@
+{
+  "env": {
+    "NOMINATIONS_START_DATE": "2023-10-31",
+    "NOMINATIONS_END_DATE": "2024-12-25",
+
+    "VOTING_START_DATE": "2025-01-01",
+    "VOTING_END_DATE": "2025-01-31",
+
+    "LANG": "en_US.UTF-8",
+    "NODE_ENV": "production",
+    "NODE_OPTIONS": "--openssl-legacy-provider",
+    "RAILS_ENV": "production",
+    "RAILS_LOG_TO_STDOUT": "enabled",
+    "RAILS_SERVE_STATIC_FILES": "enabled"
+  },
+  "buildpacks": [{ "url": "heroku/nodejs" }, { "url": "heroku/ruby" }],
+  "stack": "heroku-24"
+}
