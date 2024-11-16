@@ -28,7 +28,6 @@
         <p>
         <% if within_nominations_period? %>
           <strong>Want to submit your candidacy for one of five (5) spots on the Columbus Ruby Brigade's Board?</strong><br>
-          <em>Please remember that you will need to have attended a year's worth of CRB meetings to be eligible to serve on the board.</em>
           <p>
             <%= link_to 'Submit Candidacy!', new_candidate_path, class: 'waves-effect waves-light btn center-align' %>
           </p>
@@ -41,7 +40,7 @@
         </p>
         <p>
         <% if within_voting_period? %>
-          <strong>It's time to vote for 2021 CRB Board Members! <br>
+          <strong>It's time to vote for 2025 CRB Board Members! <br>
           Read up on the candidates! Cast your votes!</strong>
           <p>
             <%= link_to 'Go Vote!', candidates_path, class: 'waves-effect waves-light btn center-align' %>
